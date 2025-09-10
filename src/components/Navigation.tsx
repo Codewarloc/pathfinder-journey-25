@@ -11,27 +11,45 @@ export const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">P</span>
             </div>
             <span className="text-2xl font-bold text-gradient">PathSeeker</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </a>
-            <Link to="/careers" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              to="/"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              to="/careers"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               Careers
             </Link>
-            <Link to="/quiz" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              to="/quiz"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               Take Quiz
             </Link>
-            <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link
+              to="/multimedia"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Multimedia
+            </Link>
+            <Link
+              to="/about"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               About
-            </a>
+            </Link>
           </div>
 
           {/* Auth Buttons */}
@@ -60,21 +78,41 @@ export const Navigation = () => {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border/50">
             <div className="flex flex-col space-y-4">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                Features
-              </a>
-              <Link to="/careers" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                to="/careers"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Careers
               </Link>
-              <Link to="/quiz" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/quiz"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Take Quiz
               </Link>
-              <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/multimedia"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Multimedia
+              </Link>
+              <Link
+                to="/about"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 About
-              </a>
+              </Link>
               <div className="flex flex-col space-y-2 pt-4">
                 <Link to="/login">
-                  <Button variant="ghost" className="w-full">Sign In</Button>
+                  <Button variant="ghost" className="w-full">
+                    Sign In
+                  </Button>
                 </Link>
                 <Link to="/register">
                   <Button className="btn-hero w-full">Get Started</Button>
