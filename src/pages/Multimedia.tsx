@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Play, FileText, Star, ThumbsUp, ThumbsDown, BarChart } from "lucide-react";
-import { Navigation } from "@/components/Navigation"; // ✅ Make sure you already have this component
+// ✅ Make sure you already have this component
 
 // Content type
 interface Content {
@@ -51,7 +51,7 @@ const MultimediaHub = () => {
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* ✅ Navbar */}
-      <Navigation />
+   
 
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />

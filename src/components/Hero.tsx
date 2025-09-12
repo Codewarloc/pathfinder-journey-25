@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   ArrowRight,
@@ -10,20 +10,42 @@ import {
   Users,
   FileText,
   Download,
-  BarChart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import api from "@/lib/api";
+import { toast } from "@/components/ui/sonner";
 
 export const Hero = () => {
   const [feedback, setFeedback] = useState("");
   const [type, setType] = useState("suggestion");
+  const [loading, setLoading] = useState(false);
 
   const resources = [
     { id: 1, title: "Beginner’s Guide to Careers", tag: "Beginner", type: "PDF" },
     { id: 2, title: "Scholarship Checklist", tag: "Scholarship", type: "Checklist" },
     { id: 3, title: "Top 10 Skills Infographic", tag: "Skill-Building", type: "Infographic" },
   ];
+
+  const handleSubmitFeedback = async () => {
+    if (!feedback.trim()) {
+      toast.error("⚠️ Please enter some feedback before submitting.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // ✅ Fixed field names to match Django backend
+      await api.post("feedback/", { category: type, message: feedback });
+      toast.success("✅ Feedback submitted successfully!");
+      setFeedback("");
+      setType("suggestion");
+    } catch (err) {
+      console.error("Feedback submission error:", err);
+      toast.error("❌ Failed to submit feedback. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
@@ -152,13 +174,13 @@ export const Hero = () => {
         </Card>
       </div>
 
-      {/* 📊 Feedback & Analytics Section */}
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 mb-20">
+      {/* 📤 Feedback Form Section */}
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 mb-20 max-w-xl mx-auto">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <BarChart className="w-5 h-5 mr-2 text-primary" />
-              Feedback & Analytics
+              <Sparkles className="w-5 h-5 mr-2 text-primary" />
+              Send Feedback
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -174,6 +196,7 @@ export const Hero = () => {
                 <option value="query">Query</option>
               </select>
             </div>
+
             <div>
               <label className="text-sm font-medium">Your Feedback</label>
               <Textarea
@@ -183,21 +206,19 @@ export const Hero = () => {
                 className="mt-1"
               />
             </div>
-            <Button className="w-full">Submit Feedback</Button>
 
-            {/* Analytics Placeholder */}
-            <div className="pt-4 border-t border-border text-sm text-muted-foreground">
-              <p>📈 Analytics Dashboard (Admin View)</p>
-              <ul className="list-disc list-inside">
-                <li>Sentiment Summary: Positive</li>
-                <li>Most common type: Suggestions</li>
-              </ul>
-            </div>
+            <Button
+              className="w-full"
+              onClick={handleSubmitFeedback}
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit Feedback"}
+            </Button>
           </CardContent>
         </Card>
       </div>
     </section>
   );
-}; 
+};
 
 export default Hero;

@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/Navigation";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -177,7 +177,7 @@ const CareerBank = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+  
       
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
